@@ -22,9 +22,7 @@ var algorithms = {
 }
 
 var getTimeStamp = function (time) {
-    console.log("time      " + time)
     const NEM_EPOCH = Date.UTC(2015, 2, 29, 0, 6, 25, 0)
-    console.log("NEM_EPOCH " + NEM_EPOCH)
     return Math.floor((time * 1000 + NEM_EPOCH))
 };
 
@@ -74,6 +72,8 @@ function check(url) {
             var hash = crypto.createHash(algorithms[algorithm])
             hash.update(new Buffer(pageBinary))
             var pagesHash = hash.digest('hex')
+            console.log(payload)
+            console.log(pagesHash)
             if (payload.slice(10) == pagesHash) {
                 console.log(res)
                 document.getElementById('status').textContent = "監査に成功しました"
