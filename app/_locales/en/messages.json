@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "WebApostille",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "WebApostill",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "NEMのアポスティーユを使用して閲覧中のウェブページを監査します。",
+    "description": "The description of the application"
+  },
+  "browserActionTitle": {
+    "message": "WebApostille",
+    "description": "The title of the browser action button"
+  }
+}
