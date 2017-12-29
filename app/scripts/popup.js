@@ -45,6 +45,11 @@ function check(url) {
         var pageBinary = this.response
         var filename = url.match(".+/(.+?)([\?#;].*)?$")[1]
         var message = filename.match(/.*%20--%20Apostille%20TX%20([0-9a-f]{64})%20--%20Date%20\d{4}-\d{1,2}-\d{1,2}/)
+
+        var hash = crypto.createHash('sha256')
+        hash.update(new Buffer(pageBinary))
+        var pagesHash = hash.digest('hex')
+
         if (message == null) {
             failed()
             return
@@ -72,10 +77,7 @@ function check(url) {
             var hash = crypto.createHash(algorithms[algorithm])
             hash.update(new Buffer(pageBinary))
             var pagesHash = hash.digest('hex')
-            console.log(payload)
-            console.log(pagesHash)
             if (payload.slice(10) == pagesHash) {
-                console.log(res)
                 document.getElementById('status').textContent = "監査に成功しました"
                 var date = new Date(getTimeStamp(res["transaction"]["timeStamp"]))
                 document.getElementById('timestamp').textContent = "TimeStamp"
