@@ -39,29 +39,25 @@ function failed() {
 }
 
 function check(url) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function (e) {
-        var pageBinary = this.response;
-        var filename = url.match('.+/(.+?)([\?#;].*)?$')[1];
-        var message = filename.match(/.*%20--%20Apostille%20TX%20([0-9a-f]{64})%20--%20Date%20\d{4}-\d{1,2}-\d{1,2}/)
-
-        var hash = crypto.createHash('sha256');
-        hash.update(new Buffer(pageBinary));
-        var pagesHash = hash.digest('hex');
+        const pageBinary = this.response;
+        const filename = url.match('.+/(.+?)([\?#;].*)?$')[1];
+        const message = filename.match(/.*%20--%20Apostille%20TX%20([0-9a-f]{64})%20--%20Date%20\d{4}-\d{1,2}-\d{1,2}/)
 
         if (message == null) {
             failed();
             return;
         }
-        var txhash = message[1];
-        var getEndpoint = function () {
-            var target_node = NODES[Math.floor(Math.random() * NODES.length)];
+        const txhash = message[1];
+        const getEndpoint = function () {
+            const target_node = NODES[Math.floor(Math.random() * NODES.length)];
             return 'http://' + target_node + '/transaction/get?hash=' + txhash;
         }
-        var sendAjax = function () {
+        const sendAjax = function () {
             $.ajax({ url: getEndpoint(), type: 'GET' }).then(
                 function (res) { checkTransaction(res) },
                 function (res) {
@@ -70,17 +66,17 @@ function check(url) {
             )
         };
 
-        var checkTransaction = function (res) {
-            var payload = res['transaction']['message']['payload']
+        const checkTransaction = function (res) {
+            const payload = res['transaction']['message']['payload']
             if (payload.slice(0, 9) != messagesFixedValue) {
                 failed();
             }
-            var algorithm = payload.slice(9, 10);
-            var hash = crypto.createHash(algorithms[algorithm]);
+            const algorithm = payload.slice(9, 10);
+            const hash = crypto.createHash(algorithms[algorithm]);
             hash.update(new Buffer(pageBinary));
-            var pagesHash = hash.digest('hex');
+            const pagesHash = hash.digest('hex');
             if (payload.slice(10) == pagesHash) {
-                var date = new Date(getTimeStamp(res['transaction']['timeStamp']));
+                const date = new Date(getTimeStamp(res['transaction']['timeStamp']));
                 $('#status').text('監査に成功しました');
                 $('#timestamp').text('TimeStamp');
                 $('#time').text(date.toUTCString());
@@ -97,7 +93,7 @@ function check(url) {
 
 window.onload = function () {
     chrome.tabs.getSelected(window.id, function (tab) {
-        var url = tab.url;
+        const url = tab.url;
         check(url);
     })
 }
