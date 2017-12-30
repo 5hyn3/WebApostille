@@ -1,10 +1,10 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-var $ = require('jquery');
-var crypto = require('crypto');
+const $ = require('jquery');
+const crypto = require('crypto');
 
-var NODES = Array(
+const NODES = Array(
     'alice2.nem.ninja:7890',
     'alice3.nem.ninja:7890',
     'alice4.nem.ninja:7890',
@@ -13,7 +13,7 @@ var NODES = Array(
     'alice7.nem.ninja:7890'
 );
 
-var algorithms = {
+const algorithms = {
     1: 'md5',
     2: 'sha1',
     3: 'sha256',
@@ -21,7 +21,9 @@ var algorithms = {
     9: 'sha3-512'
 };
 
-var getTimeStamp = function (time) {
+const messagesFixedValue = 'fe4e54590'
+
+function getTimeStamp(time) {
     const NEM_EPOCH = Date.UTC(2015, 2, 29, 0, 6, 25, 0);
     return Math.floor((time * 1000 + NEM_EPOCH));
 }
@@ -70,7 +72,7 @@ function check(url) {
 
         var checkTransaction = function (res) {
             var payload = res['transaction']['message']['payload']
-            if (payload.slice(2, 9) != '4e54590') {
+            if (payload.slice(0, 9) != messagesFixedValue) {
                 failed();
             }
             var algorithm = payload.slice(9, 10);
