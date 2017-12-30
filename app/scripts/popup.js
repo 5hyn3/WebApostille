@@ -38,6 +38,28 @@ function failed() {
     $('#status').text('監査に失敗しました');
 }
 
+function setOwnerAddress(publicKey) {
+    console.log(publicKey)
+    const getEndpoint = function () {
+        const target_node = NODES[Math.floor(Math.random() * NODES.length)];
+        return 'http://' + target_node + '/account/get/from-public-key?publicKey=' + publicKey;
+    }
+    const sendAjax = function () {
+        $.ajax({ url: getEndpoint(), type: 'GET' }).then(
+            function (res) { checkTransaction(res) },
+            function (res) {
+                sendAjax();
+            }
+        )
+    };
+
+    const checkTransaction = function (res) {
+        console.log(res)
+        $('#address').text('Owner:' + res['account']['address'])
+    };
+    sendAjax();
+}
+
 function check(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -78,8 +100,8 @@ function check(url) {
             if (payload.slice(10) == pagesHash) {
                 const date = new Date(getTimeStamp(res['transaction']['timeStamp']));
                 $('#status').text('監査に成功しました');
-                $('#timestamp').text('TimeStamp');
-                $('#time').text(date.toUTCString());
+                $('#timestamp').text('TimeStamp:' + date.toUTCString());
+                setOwnerAddress(res['transaction']['signer'])
             } else {
                 failed();
             }
