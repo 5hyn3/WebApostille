@@ -21,7 +21,7 @@ const algorithms = {
     9: 'sha3-512'
 };
 
-const messagesFixedValue = 'fe4e54590'
+const messagesFixedValue = 'fe4e54590';
 
 function getTimeStamp(time) {
     const NEM_EPOCH = Date.UTC(2015, 2, 29, 0, 6, 25, 0);
