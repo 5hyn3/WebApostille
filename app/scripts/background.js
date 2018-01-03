@@ -3,7 +3,6 @@ chrome.contextMenus.create({
     contexts: ["page"],
     type: "normal",
     onclick: function (info) {
-        console.log(info);
         localStorage.auditUrl = info["pageUrl"];
         chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
