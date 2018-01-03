@@ -23,7 +23,7 @@ chrome.contextMenus.create({
     contexts: ["image"],
     type: "normal",
     onclick: function (info) {
-        localStorage.auditUrl = info["pageUrl"];
+        localStorage.auditUrl = info["srcUrl"];
         chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
 });
