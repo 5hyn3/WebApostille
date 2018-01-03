@@ -4,7 +4,7 @@ chrome.contextMenus.create({
     type: "normal",
     onclick: function (info) {
         console.log(info);
-        console.log(info["pageUrl"]);
+        localStorage.auditUrl = info["pageUrl"];
         chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
 });
@@ -14,7 +14,8 @@ chrome.contextMenus.create({
     contexts: ["link"],
     type: "normal",
     onclick: function (info) {
-        console.log(info["linkUrl"]);
+        localStorage.auditUrl = info["linkUrl"];
+        chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
 });
 
@@ -23,6 +24,7 @@ chrome.contextMenus.create({
     contexts: ["image"],
     type: "normal",
     onclick: function (info) {
-        console.log(info["pageUrl"]);
+        localStorage.auditUrl = info["pageUrl"];
+        chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
 });

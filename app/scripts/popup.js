@@ -11,6 +11,7 @@ function failed() {
 }
 
 function audit(url) {
+    $('#url').text('URL:' + url);
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
