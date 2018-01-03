@@ -5,7 +5,7 @@ chrome.contextMenus.create({
     onclick: function (info) {
         console.log(info);
         console.log(info["pageUrl"]);
-        chrome.browserAction.show(0);
+        chrome.tabs.create({ url: 'pages/result.html' }, tab => { });
     }
 });
 
