@@ -54,7 +54,7 @@ function audit(url) {
 
 window.onload = function () {
     chrome.tabs.getSelected(window.id, function (tab) {
-        const url = tab.url;
+        const url = localStorage.auditUrl;
         audit(url);
     })
 }
