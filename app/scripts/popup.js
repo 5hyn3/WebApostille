@@ -6,12 +6,6 @@
 const $ = require('jquery');
 const nemAudit = require('./nem_audit');
 
-function string_to_buffer(src) {
-    return (new Uint16Array([].map.call(src, function (c) {
-        return c.charCodeAt(0);
-    }))).buffer;
-}
-
 function failed() {
     $('#status').text('監査に失敗しました');
 }
