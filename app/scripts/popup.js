@@ -1,10 +1,13 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
+'use strict';
+
 const $ = require('jquery');
-const crypto = require('crypto');
 
 function nemAudit(transaction, pageBinary) {
+    const crypto = require('crypto');
+
     const algorithms = {
         1: 'md5',
         2: 'sha1',
