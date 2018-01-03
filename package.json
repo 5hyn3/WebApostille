@@ -1,7 +1,7 @@
 {
   "name": "WebApostille",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NEMのアポスティーユを使用して閲覧中のウェブページを監査します。",
   "scripts": {
     "start": "npm run dev:chrome",
