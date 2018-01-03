@@ -54,7 +54,7 @@ function sendRequestNimAPI(path, func) {
     sendAjax();
 }
 
-function check(url) {
+function audit(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
@@ -102,7 +102,7 @@ function check(url) {
 window.onload = function () {
     chrome.tabs.getSelected(window.id, function (tab) {
         const url = tab.url;
-        check(url);
+        audit(url);
     })
 }
 
