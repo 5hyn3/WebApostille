@@ -23,6 +23,7 @@
     "default_popup": "pages/popup.html"
   },
   "permissions": [
+    "contextMenus",
     "tabs",
     "<all_urls>"
   ]
