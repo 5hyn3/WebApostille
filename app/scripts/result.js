@@ -6,9 +6,16 @@
 const $ = require('jquery');
 const nemAudit = require('./nem_audit');
 
+function show() {
+    $("#loading").fadeOut("fast");
+    $("#contents").delay(400).fadeIn("fast");
+}
+
 function failed() {
     $('#status').text('監査に失敗しました');
+    show();
 }
+
 
 function audit(url) {
     $('#url').text('URL:' + url);
@@ -38,6 +45,7 @@ function audit(url) {
 
                 const setOwnerAddress = function (res) {
                     $('#address').text('Owner:' + res['account']['address']);
+                    show();
                 };
 
                 nemAudit.sendRequestNimAPI(getAccountFromPublicKeyPath, setOwnerAddress);
@@ -51,8 +59,11 @@ function audit(url) {
     xhr.send();
 }
 
-
 window.onload = function () {
+    $("#contents").hide();
+    setTimeout(function () {
+        show();
+    }, 3000);
     chrome.tabs.getSelected(window.id, function (tab) {
         const url = localStorage.auditUrl;
         audit(url);
