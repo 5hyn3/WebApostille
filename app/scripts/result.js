@@ -22,6 +22,7 @@ function success() {
 }
 
 function init() {
+    $("#contents").hide();
     $('#failed').hide();
     $('#success').hide();
 }
@@ -70,7 +71,6 @@ function audit(url) {
 
 window.onload = function () {
     init();
-    $("#contents").hide();
     setTimeout(function () {
         show();
     }, 3000);
