@@ -12,13 +12,23 @@ function show() {
 }
 
 function failed() {
-    $('#status').text('監査に失敗しました');
+    $('#failed').show();
     show();
 }
 
+function success() {
+    $('#success').show();
+    show();
+}
+
+function init() {
+    $("#contents").hide();
+    $('#failed').hide();
+    $('#success').hide();
+}
 
 function audit(url) {
-    $('#url').text('URL:' + url);
+    $('#url').text(url);
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
@@ -40,12 +50,12 @@ function audit(url) {
             if (nemAudit.audit(res, pageBinary)) {
                 const date = new Date(nemAudit.getTimeStamp(res['transaction']['timeStamp']));
                 $('#status').text('監査に成功しました');
-                $('#timestamp').text('TimeStamp:' + date.toUTCString());
+                $('#timestamp').text(date.toUTCString());
                 const getAccountFromPublicKeyPath = '/account/get/from-public-key?publicKey=' + res['transaction']['signer'];
 
                 const setOwnerAddress = function (res) {
-                    $('#address').text('Owner:' + res['account']['address']);
-                    show();
+                    $('#address').text(res['account']['address']);
+                    success();
                 };
 
                 nemAudit.sendRequestNimAPI(getAccountFromPublicKeyPath, setOwnerAddress);
@@ -60,7 +70,7 @@ function audit(url) {
 }
 
 window.onload = function () {
-    $("#contents").hide();
+    init();
     setTimeout(function () {
         show();
     }, 3000);
