@@ -6,7 +6,7 @@ module.exports = {
         return Math.floor((time * 1000 + NEM_EPOCH));
     },
 
-    sendRequestNimAPI: function (path, func) {
+    sendRequestNisAPI: function (path, func) {
         const NODES = Array(
             'alice2.nem.ninja:7890',
             'alice3.nem.ninja:7890',

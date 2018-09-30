@@ -58,12 +58,12 @@ function audit(url) {
                     success();
                 };
 
-                nemAudit.sendRequestNimAPI(getAccountFromPublicKeyPath, setOwnerAddress);
+                nemAudit.sendRequestNisAPI(getAccountFromPublicKeyPath, setOwnerAddress);
             } else {
                 failed();
             }
         };
-        nemAudit.sendRequestNimAPI(getTransactionPath, checkTransaction);
+        nemAudit.sendRequestNisAPI(getTransactionPath, checkTransaction);
     }
 
     xhr.send();
